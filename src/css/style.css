@@ -4,10 +4,13 @@ html {
 }
 
 body {
-  height: 100%;
+  height: 100vh;
   width: 100%;
   padding: 0;
   margin: 0;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  overflow: hidden;
 }
 
 * {
@@ -15,6 +18,99 @@ body {
   font-family: inherit;
   color: inherit;
 }
+
+
+.Contacts_Top_Items {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: bisque;
+}
+.Contacts_Search_Container {
+  background-color: rgb(145, 119, 87);
+  padding: 8px;
+}
+#Contacts_Search {
+  width: 100%;
+  text-align: center;
+}
+
+.Contacts_Main {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.Contacts_My_Profile {
+  height: 80px;
+  background-color: aquamarine;
+}
+
+.Contacts_Category {
+  background-color: gainsboro;
+}
+.Contacts_Header {
+  
+  padding: 4px 10px;
+}
+
+.Contacts_Holder {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.Contacts {
+  text-align: left;
+  padding: 8px 10px;
+  border: 0;
+}
+
+
+
+
+
+
+main {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.Contacts_Section {
+  background-color: beige;
+  
+  min-width: 320px;
+}
+
+.Information_Section {
+  background-color: cadetblue;
+  flex-grow: 1;
+}
+
+@media screen and (max-width: 480px) {
+  /* … */
+  .Contacts_Section {
+    width: 100%;
+  }
+  .Information_Section {
+    display: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --------------- */
 
 #Contacts-Container {
   background-color: aquamarine;
