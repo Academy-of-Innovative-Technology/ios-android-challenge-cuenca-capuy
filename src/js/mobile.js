@@ -33,8 +33,10 @@ function Update() {
     Current_Width = window.innerWidth;
     if (Current_Width <= Mobile_Width && Information_Section.classList.contains("Mobile") == false){
         Information_Section.classList.add("Mobile");
+        
     } else {
         Information_Section.classList.remove("Mobile");
+        Switch_To_Contacts();
     }
     
 }

@@ -50,6 +50,7 @@ main {
   display: flex;
   flex-direction: column;
   height: 100%;
+  
 }
 
 .Contacts_Top {
@@ -67,7 +68,7 @@ main {
 .Top_Nav {
   display: flex;
   justify-content: space-between;
-  color: blue;
+  color: #0a84ff;
   padding: 8px;
 }
 
@@ -133,7 +134,6 @@ main {
 }
 
 .Information_Section {
-  background-color: cadetblue;
   flex-grow: 1;
 }
 
@@ -141,6 +141,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 30px;
 }
 .Information_Profile {
   height: 100px;
@@ -149,14 +150,15 @@ main {
 .Information_Interact {
   display: flex;
   justify-content: space-evenly;
+  padding-bottom: 30px;
 }
 .Information_Interact_Button {
-  color: rgb(0, 68, 255);
+  color: #0a84ff;
 }
 
 .Information_Interact_Button_SVG {
   height: 25px;
-  background-color: rgb(0, 68, 255);
+  background-color: #0a84ff;
   fill: white;
   border-radius: 100%;
 }
@@ -167,26 +169,38 @@ main {
 .Information_Main {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 20px;
+  padding: 8px;
 }
 
 .Information_Contact_Items {
   display: flex;
-  background-color: gray;
+  background-color: transparent;
+  gap: 8px;
 }
 .Information_Contact_Logo {
-  background-color: rgb(241, 241, 241);
+  background-color: rgb(238 238 239);;
   border-radius: 100%;
   padding: 8px;
-  fill: blue;
+  fill: #0a84ff;
+  width: 24px;
+  flex-shrink: 0;
 }
 .Information_Contact_Header {
   margin: 0;
   font-weight: normal;
 }
+.Information_Contact_Info {
+  width: 100%;
+}
 .Information_Contant_Content {
   margin: 0;
-  color: blue;
+  color: #0a84ff;
+  width: 100%;
+}
+.Information_Contant_Content:last-child{
+  border-bottom: 2px solid gainsboro;
+  padding-bottom: 20px;
 }
 
 @media screen and (max-width: 630px) {
@@ -201,6 +215,12 @@ main {
     translate: 100%;
   }
 }
+@media screen and (min-width: 631px){
+    .Contacts_Section {
+    border-right: 2px solid gainsboro;
+  }
+}
+
 
 /* --------------- */
 
