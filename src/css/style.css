@@ -5,6 +5,8 @@
 html {
   height: 100%;
   width: 100%;
+  overflow-x: scroll;
+
 }
 
 body {
@@ -40,6 +42,7 @@ main {
   display: flex;
   flex-direction: row;
   height: 100%;
+  position: relative;
 }
 
 .Contacts_Section {
@@ -195,7 +198,7 @@ main {
     position: absolute;
     height: 100%;
     width: 100%;
-    display: none;
+    translate: 100%;
   }
 }
 

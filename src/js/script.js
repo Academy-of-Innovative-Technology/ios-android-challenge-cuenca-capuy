@@ -140,7 +140,7 @@ function Display_Contacts(Contacts) {
       }
     }
 
-    let HTML = `<button class="Contacts" onClick="Contact_Select(${Contact.phone[0].number})">${Contact.name.first} ${Contact.name.last}</button>`;
+    let HTML = `<button class="Contacts" onClick="Contact_Select(${Contact.phone[0].number}); Switch_To_Mobile_Info()">${Contact.name.first} ${Contact.name.last}</button>`;
     Letter_Category.insertAdjacentHTML("beforeend", HTML);
   });
 }
