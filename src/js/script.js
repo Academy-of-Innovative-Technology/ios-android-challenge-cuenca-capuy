@@ -60,7 +60,15 @@ const Contact_Selectors_DOM = document.querySelectorAll(".Contact_Selector");
 const Default_Profile_IMG =
   "https://cdn-icons-png.flaticon.com/512/9187/9187604.png";
 
-function Contact_Select() {}
+function Contact_Select(number) {
+  console.log(number + " has been selected");
+  let Information = Find_Profile_By_Number(number);
+  if (Information == "" || Information == undefined) {
+    console.log("No Profile Found");
+  }
+
+  console.log(Information.name.first);
+}
 
 async function Get_All_Contacts() {
   try {
@@ -77,43 +85,89 @@ async function Get_All_Contacts() {
   }
 }
 
-function Load_All_Contacts() {
-  let Promise_Contacts = Get_All_Contacts();
-  //console.log(Contacts_List);
+let Contacts_Search_Filter_Input_DOM =
+  document.querySelector("#Contacts_Search");
+
+let Current_Contacts = [];
+
+function Find_Profile_By_Number(Phone_Number) {
+  if (Current_Contacts == undefined || Current_Contacts == []) {
+    console.log("Current Contacts are empty, can't find");
+    return;
+  }
+  let Result = Current_Contacts.find(
+    (Contact) => Contact.phone[0].number == Phone_Number,
+  );
+  return Result;
+}
+
+function Display_Contacts(Contacts) {
+  localStorage.setItem("Contacts_Data", JSON.stringify(Contacts));
+  Current_Contacts = Contacts;
   Load_All_Categories();
-  Promise_Contacts.then((List) => {
-    let Contacts = List.Contacts;
+  Contacts.forEach((Contact) => {
+    if (Contact.phone[0].number == undefined) {
+      console.log("Error trying load an contact that does not have an number");
+      return;
+    }
 
-    Contacts.forEach((Contact) => {
-      let Profile_IMG = Contact.Profile;
-      console.log(Profile_IMG);
-      if (Profile_IMG == "" || Profile_IMG == undefined) {
-        Profile_IMG = Default_Profile_IMG;
-      }
-      if (Contact.phone[0].number == undefined) {
-        console.log(
-          "Error trying load an contact that does not have an number",
-        );
-        return;
-      }
+    let Full_Name = `${Contact.name.first} ${Contact.name.last}`;
+    let Initial_Letter = Contact.name.first[0];
+    console.log(Initial_Letter);
+    let Letter_Category = document.querySelector(
+      `#Contacts_Holder_${Initial_Letter}`,
+    );
 
-      let Initial_Letter = Contact.name.first[0];
-      let Letter_Category = document.querySelector(
-        `#Contacts_Holder_${Initial_Letter}`,
+    if (Letter_Category == undefined || Letter_Category == "") {
+      console.log(
+        "Error trying load an contact that don't belong to any category",
       );
+      return;
+    }
 
-      if (Letter_Category == undefined || Letter_Category == "") {
-        console.log(
-          "Error trying load an contact that don't belong to any category",
-        );
+    if (
+      Contacts_Search_Filter_Input_DOM.value != undefined ||
+      Contacts_Search_Filter_Input_DOM.value != ""
+    ) {
+      //console.log(Contacts_Search_Filter_Input_DOM.value);
+
+      let IsMatching = Full_Name.toLowerCase().includes(
+        Contacts_Search_Filter_Input_DOM.value.toLowerCase(),
+      );
+      //console.log(IsMatching);
+      if (!IsMatching) {
         return;
       }
+    }
 
-      let HTML = `<button class="Contacts">${Contact.name.first} ${Contact.name.last}</button>`;;
-      Letter_Category.insertAdjacentHTML("beforeend", HTML);
-    });
+    let HTML = `<button class="Contacts" onClick="Contact_Select(${Contact.phone[0].number})">${Contact.name.first} ${Contact.name.last}</button>`;
+    Letter_Category.insertAdjacentHTML("beforeend", HTML);
   });
 }
 
+function Load_All_Contacts() {
+  let Local_Contacts = JSON.parse(localStorage.getItem("Contacts_Data"));
+  if (Local_Contacts == undefined || Local_Contacts == "") {
+    let Contacts = Get_All_Contacts();
+    Contacts.then((List) => {
+      Display_Contacts(List.Contacts);
+    });
+  } else {
+    Display_Contacts(Local_Contacts);
+  }
+}
 
 Load_All_Contacts();
+Contacts_Search_Filter_Input_DOM.addEventListener("input", () => {
+  console.log("Filter Changed");
+  Load_All_Contacts();
+});
+
+// Phones, Emails. Socials, Note
+
+// let movies;
+// if (Person_Data.movies) {
+//   movies = `<p class="small">- Movies -</p><ul>${Person_Data.movies
+//     .map((movie) => `<li>${movie}</li>`)
+//     .join("")}</ul>`;
+// }

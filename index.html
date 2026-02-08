@@ -1,63 +1,147 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>iOS / Android Contacts</title>
 
     <link href="src/css/style.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
+  </head>
+  <body>
     <main>
+      <!-- <div id="Contacts-Container"></div> -->
 
+      <section class="Contacts_Section">
+        <div class="Contacts_Top">
+          <div class="Contacts_Top_Items">
+            <nav class="Top_Nav">
+              <button id="Return_To_Main_BTN">Lists</button>
+              <button id="Add_Contact_BTN">+</button>
+            </nav>
+            <h1 style="margin: 8px">Contacts</h1>
+          </div>
+          <div class="Contacts_Top_Items Contacts_Search_Container">
+            <input id="Contacts_Search" placeholder="🔍 Search" />
+          </div>
+        </div>
 
-        <!-- <div id="Contacts-Container"></div> -->
-
-        <section class="Contacts_Section">
-            <div class="Contacts_Top">
-                <div class="Contacts_Top_Items">
-                    <h1>Contacts</h1>
-                    <button>+</button>
-                </div>
-                <div class="Contacts_Top_Items Contacts_Search_Container">
-                    <input id="Contacts_Search" placeholder="🔍 Search">
-                </div>
+        <div class="Contacts_Main">
+          <div class="Contacts_My_Profile">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/9187/9187604.png"
+              height="50px"
+            />
+            <div>
+              <h2 style="margin: 0">John Appleseed</h2>
+              <p style="margin: 0; color: gray">My Card</p>
             </div>
+          </div>
+          <div id="Contacts_Container">
+            <section class="Contacts_Category">
+              <header class="Contacts_Header">A</header>
+              <div class="Contacts_Holder">
+                <button class="Contacts">Apple</button>
+                <button class="Contacts">Anthony</button>
+              </div>
+            </section>
 
-            <div class="Contacts_Main">
+            <section class="Contacts_Category">
+              <header class="Contacts_Header">B</header>
+              <div class="Contacts_Holder">
+                <button class="Contacts">Bush</button>
+                <button class="Contacts">Bar</button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
 
-                <div class="Contacts_My_Profile">
+      <section class="Information_Section">
+        <div class="Information_Top">
+          <nav class="Top_Nav">
+            <button>Edit</button>
+          </nav>
+          <div class="Information_Identity">
+            <img
+              class="Information_Profile"
+              src="https://cdn-icons-png.flaticon.com/512/9187/9187604.png"
+            />
+            <h1>Olenna Mason</h1>
+          </div>
 
-                </div>
-                <div id="Contacts_Container">
+          <div class="Information_Interact">
+            <button class="Information_Interact_Button">
+              <svg
+                class="Information_Interact_Button_SVG"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#1f1f1f"
+              >
+                <path
+                  d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12Z"
+                />
+              </svg>
+              <p>Home</p>
+            </button>
 
-                    <section class="Contacts_Category">
-                        <header class="Contacts_Header">A</header>
-                        <div class="Contacts_Holder">
-                            <button class="Contacts">Apple</button>
-                            <button class="Contacts">Anthony</button>
-                        </div>
-                    </section>
+            <button class="Information_Interact_Button">
+              <svg
+                class="Information_Interact_Button_SVG"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#1f1f1f"
+              >
+                <path
+                  d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12Z"
+                />
+              </svg>
+              <p>Home</p>
+            </button>
 
-                    <section class="Contacts_Category">
-                        <header class="Contacts_Header">B</header>
-                        <div class="Contacts_Holder">
-                            <button class="Contacts">Bush</button>
-                            <button class="Contacts">Bar</button>
-                        </div>
-                    </section>
+            <button class="Information_Interact_Button">
+              <svg
+                class="Information_Interact_Button_SVG"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#1f1f1f"
+              >
+                <path
+                  d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12Z"
+                />
+              </svg>
+              <p>Home</p>
+            </button>
+          </div>
+        </div>
+        <div class="Information_Main">
 
-                </div>
+          <div class="Information_Contact_Items">
+            <svg class="Information_Contact_Logo" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280 320-200v-80L480-520 160-720v80l320 200Z"/></svg>
+            <div class="Information_Contact_Info">
+              <h5 class="Information_Contact_Header">Phone Number</h5>
+              <p class="Information_Contant_Content">(909) 905-9281 (Work)</p>
+              <p class="Information_Contant_Content">(909) 905-9581 (Home)</p>
             </div>
+          </div>
 
-        </section>
-
-        <section class="Information_Section">
-            Test
-        </section>
-
-
+          <div class="Information_Contact_Items">
+            <svg class="Information_Contact_Logo" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280 320-200v-80L480-520 160-720v80l320 200Z"/></svg>
+            <div class="Information_Contact_Info">
+              <h5 class="Information_Contact_Header">Phone Number</h5>
+              <p class="Information_Contant_Content">(909) 905-9281 (Work)</p>
+              <p class="Information_Contant_Content">(909) 905-9581 (Home)</p>
+            </div>
+          </div>
+          
+        </div>
+      </section>
     </main>
-	<script src="src/js/script.js"></script>
-</body>
+    <script src="src/js/script.js"></script>
+  </body>
 </html>
