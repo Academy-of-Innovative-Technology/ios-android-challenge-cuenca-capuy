@@ -94,11 +94,10 @@ function Contact_Select(number) {
   if (Information.phone) {
     Information.phone.forEach((phone) => {
       Phones += `<p class="Information_Contant_Content">${phone.number} (${phone.type})</p>`;
-
     });
   }
 
-  let Emails ="";
+  let Emails = "";
   if (Information.email) {
     Information.email.forEach((email) => {
       Emails += `<p class="Information_Contant_Content">${email.address} (${email.type})</p>`;
@@ -164,10 +163,6 @@ function Contact_Select(number) {
           </div>`;
     Information_Main_DOM.insertAdjacentHTML("beforeend", HTML);
   }
-
-
-
-
 }
 
 async function Get_All_Contacts() {
@@ -245,15 +240,30 @@ function Display_Contacts(Contacts) {
   });
 }
 
+let First_Load = true;
 function Load_All_Contacts() {
   let Local_Contacts = JSON.parse(localStorage.getItem("Contacts_Data"));
+  let Loaded_Contacts;
+
   if (Local_Contacts == undefined || Local_Contacts == "") {
     let Contacts = Get_All_Contacts();
     Contacts.then((List) => {
+      let Ordered_Contacts = List.Contacts.sort((a, b) =>
+        a.name.first.localeCompare(b.name.first),
+      );
+      console.log(Ordered_Contacts);
       Display_Contacts(List.Contacts);
+      Loaded_Contacts = List.Contact;
     });
   } else {
-    Display_Contacts(Local_Contacts);
+    let Ordered_Contacts = Local_Contacts.sort((a, b) =>
+        a.name.first.localeCompare(b.name.first),
+    );
+    Display_Contacts(Ordered_Contacts);
+    Loaded_Contacts = Local_Contacts;
+  }
+  if (First_Load) {
+    Contact_Select(Loaded_Contacts[0].phone[0].number)
   }
 }
 
@@ -262,9 +272,6 @@ Contacts_Search_Filter_Input_DOM.addEventListener("input", () => {
   console.log("Filter Changed");
   Load_All_Contacts();
 });
-
-
-Contact_Select(123456789);
 
 // Phones, Emails. Socials, Note
 
