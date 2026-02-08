@@ -6,7 +6,6 @@ html {
   height: 100%;
   width: 100%;
   overflow-x: scroll;
-
 }
 
 body {
@@ -50,7 +49,6 @@ main {
   display: flex;
   flex-direction: column;
   height: 100%;
-  
 }
 
 .Contacts_Top {
@@ -179,7 +177,7 @@ main {
   gap: 8px;
 }
 .Information_Contact_Logo {
-  background-color: rgb(238 238 239);;
+  background-color: rgb(238 238 239);
   border-radius: 100%;
   padding: 8px;
   fill: #0a84ff;
@@ -198,7 +196,7 @@ main {
   color: #0a84ff;
   width: 100%;
 }
-.Information_Contant_Content:last-child{
+.Information_Contant_Content:last-child {
   border-bottom: 2px solid gainsboro;
   padding-bottom: 20px;
 }
@@ -215,12 +213,14 @@ main {
     translate: 100%;
   }
 }
-@media screen and (min-width: 631px){
-    .Contacts_Section {
+@media screen and (min-width: 631px) {
+  .Contacts_Section {
     border-right: 2px solid gainsboro;
   }
+  .Top_Nav {
+    visibility: hidden;
+  }
 }
-
 
 /* --------------- */
 
