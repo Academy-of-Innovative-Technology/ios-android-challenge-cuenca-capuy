@@ -41,6 +41,7 @@ const Contact_Categories = [
 
 const Contacts_Container_DOM = document.querySelector("#Contacts_Container");
 
+
 function Load_All_Categories() {
   Contacts_Container_DOM.innerHTML = "";
   Contact_Categories.forEach((Section_Name) => {
@@ -62,6 +63,12 @@ const Information_Name_DOM = document.querySelector(".Information_Name");
 
 const Default_Profile_IMG =
   "https://cdn-icons-png.flaticon.com/512/9187/9187604.png";
+
+let Get_Instagram_Link = (user) => {
+  return `https://instagram.com/${user}`;
+}
+
+
 
 function Contact_Select(number) {
   console.log(number + " has been selected");
@@ -100,14 +107,14 @@ function Contact_Select(number) {
   let Emails = "";
   if (Information.email) {
     Information.email.forEach((email) => {
-      Emails += `<p class="Information_Contact_Content">${email.address} (${email.type})</p>`;
+      Emails += `<p class="Information_Contact_Content" onClick="EmailTo('${email.address}')">${email.address} (${email.type})</p>`;
     });
   }
 
   let Socials = "";
   if (Information.social) {
     Information.social.forEach((social) => {
-      Socials += `<p class="Information_Contact_Content">${social.name} (${social.type})</p>`;
+      Socials += `<p class="Information_Contact_Content"><a href="${Get_Instagram_Link(social.name)}">${social.name} (${social.type})</a></p>`;
     });
   }
 
@@ -272,6 +279,19 @@ Contacts_Search_Filter_Input_DOM.addEventListener("input", () => {
   console.log("Filter Changed");
   Load_All_Contacts();
 });
+
+function EmailTo(address){
+  console.log(address);
+  window.open(`mailto:${address}`);
+}
+
+
+
+
+
+
+
+
 
 // Phones, Emails. Socials, Note
 

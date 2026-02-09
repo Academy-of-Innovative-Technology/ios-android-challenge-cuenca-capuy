@@ -200,6 +200,13 @@ main {
   border-bottom: 2px solid gainsboro;
   padding-bottom: 20px;
 }
+.Information_Contact_Content::after {
+  content: "";
+}
+.Information_Contact_Content > a {
+  color: inherit;
+  text-decoration: none;
+}
 
 @media screen and (max-width: 630px) {
   /* … */
