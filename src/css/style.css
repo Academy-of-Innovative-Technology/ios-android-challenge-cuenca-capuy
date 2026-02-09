@@ -195,7 +195,12 @@ main {
   margin: 0;
   color: #0a84ff;
   width: 100%;
+  
 }
+.Information_Contact_Content[onclick] {
+  cursor: pointer;
+}
+
 .Information_Contact_Content:last-child {
   border-bottom: 2px solid gainsboro;
   padding-bottom: 20px;
@@ -206,6 +211,7 @@ main {
 .Information_Contact_Content > a {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 630px) {
