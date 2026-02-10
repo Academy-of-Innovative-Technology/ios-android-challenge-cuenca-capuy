@@ -152,6 +152,10 @@ main {
 }
 .Information_Interact_Button {
   color: #0a84ff;
+  background: none;
+  border: 0;
+  gap: 8px;
+  cursor: pointer;
 }
 
 .Information_Interact_Button_SVG {
@@ -159,6 +163,8 @@ main {
   background-color: #0a84ff;
   fill: white;
   border-radius: 100%;
+  box-sizing: content-box;
+  padding: 6px;
 }
 .Information_Interact_Button > p {
   margin: 0;
