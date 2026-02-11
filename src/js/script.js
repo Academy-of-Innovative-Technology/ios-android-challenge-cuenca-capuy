@@ -118,7 +118,7 @@ function Contact_Select(number) {
   let Socials = "";
   if (Information.social) {
     Information.social.forEach((social) => {
-      Socials += `<p class="Information_Contact_Content"><a href="${Get_Instagram_Link(social.name)}">${social.name} (${social.type})</a></p>`;
+      Socials += `<p class="Information_Contact_Content"><a target="_blank" href="${Get_Instagram_Link(social.name)}">${social.name} (${social.type})</a></p>`;
     });
   }
 
