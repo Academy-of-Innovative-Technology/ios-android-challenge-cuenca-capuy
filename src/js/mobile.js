@@ -26,6 +26,8 @@ function Switch_To_Contacts() {
   console.log("Switching to Contacts");
   Contacts_Section.scrollIntoView({ behavior: "smooth" });
 }
+
+
 Return_To_Main_BTN.addEventListener("click", Switch_To_Contacts);
 
 Edit_Cancel_BTN.addEventListener("click", Switch_To_Mobile_Info);

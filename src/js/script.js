@@ -83,16 +83,25 @@ let Social_Content = document.querySelector(".Social_Content");
 function Display_Edit_Contact() {
   document.querySelector("#Edit_First_Name").value =
     Edit_Temp_Contact.name.first;
-  document.querySelector("#Edit_First_Name").setAttribute("oninput", `Update_Information_Item('name', "N/A", 'first', this.value)`)
+  document
+    .querySelector("#Edit_First_Name")
+    .setAttribute(
+      "oninput",
+      `Update_Information_Item('name', "N/A", 'first', this.value)`,
+    );
 
   document.querySelector("#Edit_Last_Name").value = Edit_Temp_Contact.name.last;
-  document.querySelector("#Edit_Last_Name").setAttribute("oninput", `Update_Information_Item('name', "N/A", 'last', this.value)`)
-
+  document
+    .querySelector("#Edit_Last_Name")
+    .setAttribute(
+      "oninput",
+      `Update_Information_Item('name', "N/A", 'last', this.value)`,
+    );
 
   Phone_Number_Content.innerHTML = "";
   Edit_Temp_Contact.phone.forEach((Object, index) => {
-    let HTML = `<div class="Phone_Number_Container">
-                <button onclick="Delete_Information_Item('phone',${index})">-</button>
+    let HTML = `<div class="Phone_Number_Container Field_Container">
+                <button class="Edit_Information_Contact_Field_BTN" onclick="Delete_Information_Item('phone',${index})"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EA3323"><path d="M280-440h400v-80H280v80ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg></button>
                 <input name="phone_type_index_${index}" required type="text" class="Type_Input" list="Phone_Types" value="${Object.type}" oninput="Update_Information_Item('phone', ${index}, 'type', this.value)">
                 <input name="phone_number_index_${index}" required type="number" class="Edit_Input" placeholder="Phone" value="${Object.number}" oninput="Update_Information_Item('phone', ${index}, 'number', Number(this.value))">
               </div>`;
@@ -101,8 +110,8 @@ function Display_Edit_Contact() {
 
   Email_Content.innerHTML = "";
   Edit_Temp_Contact.email.forEach((Object, index) => {
-    let HTML = `<div class="Email_Container">
-                <button onclick="Delete_Information_Item('email',${index})">-</button>
+    let HTML = `<div class="Email_Container Field_Container">
+                <button class="Edit_Information_Contact_Field_BTN" onclick="Delete_Information_Item('email',${index})"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EA3323"><path d="M280-440h400v-80H280v80ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg></button>
                 <input name="email_type_index_${index}" required type="text" class="Type_Input" list="Phone_Types" value="${Object.type}" oninput="Update_Information_Item('email', ${index}, 'type', this.value)">
                 <input name="email_address_index_${index}" required type="text" class="Edit_Input" placeholder="Address" value="${Object.address}" oninput="Update_Information_Item('email', ${index}, 'address', this.value)">
               </div>`;
@@ -111,20 +120,13 @@ function Display_Edit_Contact() {
 
   Social_Content.innerHTML = "";
   Edit_Temp_Contact.social.forEach((Object, index) => {
-    let HTML = `<div class="Social_Container">
-                <button onclick="Delete_Information_Item('social',${index})">-</button>
+    let HTML = `<div class="Social_Container Field_Container">
+                <button class="Edit_Information_Contact_Field_BTN" onclick="Delete_Information_Item('social',${index})"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EA3323"><path d="M280-440h400v-80H280v80ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg></button>
                 <input name="social_type_index_${index}" required type="text" class="Type_Input" list="Phone_Types" value="${Object.type}" oninput="Update_Information_Item('social', ${index}, 'type', this.value)">
                 <input name="social_name_index_${index}" required type="text" class="Edit_Input" placeholder="Social Platform" value="${Object.name}" oninput="Update_Information_Item('social', ${index}, 'name', this.value)">
               </div>`;
     Social_Content.insertAdjacentHTML("beforeend", HTML);
   });
-
-
-
-
-
-
-
 }
 
 function Load_Edit_Contact() {
@@ -146,7 +148,7 @@ function Open_Edit_Contact() {
 }
 
 function Update_Information_Item(Section, Index, Key, NewValue) {
-  if (Index == "N/A"){
+  if (Index == "N/A") {
     Edit_Temp_Contact[Section][Key] = NewValue;
   } else {
     Edit_Temp_Contact[Section][Index][Key] = NewValue;
@@ -154,12 +156,12 @@ function Update_Information_Item(Section, Index, Key, NewValue) {
 }
 
 const Information_Contact_Field_Templates = {
-  "phone": { "type": "", "number": 0 },
-  "email": { "type": "", "address": "" },
-  "social": { "type": "", "name": "" },
+  phone: { type: "", number: 0 },
+  email: { type: "", address: "" },
+  social: { type: "", name: "" },
 };
 
-function Add_Edit_Information_Contact_Field(field_type){
+function Add_Edit_Information_Contact_Field(field_type) {
   let Template = Information_Contact_Field_Templates[field_type];
   console.log(Template);
   Edit_Temp_Contact[field_type].push(Template);
@@ -177,7 +179,7 @@ function Delete_Information_Item(category, index) {
 function Save_Edit_Information() {
   Global_Contacts[Current_Selected_Contact_Index] = Edit_Temp_Contact;
   Save_All_Contacts();
-  Load_All_Contacts()
+  Load_All_Contacts();
   document.querySelector(".Edit_Add_Section").classList.add("Closed");
 }
 
@@ -395,7 +397,7 @@ function Save_All_Contacts() {
     return;
   }
 
-  let Proper_Format = {"contacts": Global_Contacts}
+  let Proper_Format = { contacts: Global_Contacts };
   localStorage.setItem(
     Saved_Data_LocalStorage_Name,
     JSON.stringify(Proper_Format),
@@ -445,12 +447,13 @@ function Load_All_Contacts() {
   }
 }
 
-
-
 let urlParams = new URLSearchParams(window.location.search);
 Current_Selected_Contact_Index = urlParams.get("Contact_Selected") || 0;
 
 Load_All_Contacts();
+
+Open_Edit_Contact();
+
 Contacts_Search_Filter_Input_DOM.addEventListener("input", () => {
   console.log("Filter Changed");
   Load_All_Contacts();
@@ -461,18 +464,14 @@ function EmailTo(address) {
   window.open(`mailto:${address}`);
 }
 
-
 let Edit_Add_Container = document.querySelector("#Edit_Add_Container");
-
-
 
 Edit_Add_Container.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (Edit_Add_Container.checkValidity()){
+  if (Edit_Add_Container.checkValidity()) {
     Save_Edit_Information();
   }
 });
-
 
 // Phones, Emails. Socials, Note
 
