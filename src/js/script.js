@@ -95,8 +95,8 @@ function Display_Edit_Contact() {
   Edit_Temp_Contact.phone.forEach((Object, index) => {
     let HTML = `<div class="Phone_Number_Container">
                 <button onclick="Delete_Information_Item('phone',${index})">-</button>
-                <input required type="text" class="Type_Input" list="Phone_Types" value="${Object.type}" oninput="Update_Information_Item('phone', ${index}, 'type', this.value)">
-                <input required type="number" class="Edit_Input" placeholder="Phone" value="${Object.number}" oninput="Update_Information_Item('phone', ${index}, 'number', Number(this.value))">
+                <input name="phone_type_index_${index}" required type="text" class="Type_Input" list="Phone_Types" value="${Object.type}" oninput="Update_Information_Item('phone', ${index}, 'type', this.value)">
+                <input name="phone_number_index_${index}" required type="number" class="Edit_Input" placeholder="Phone" value="${Object.number}" oninput="Update_Information_Item('phone', ${index}, 'number', Number(this.value))">
               </div>`;
     Phone_Number_Content.insertAdjacentHTML("beforeend", HTML);
   });
@@ -105,8 +105,8 @@ function Display_Edit_Contact() {
   Edit_Temp_Contact.email.forEach((Object, index) => {
     let HTML = `<div class="Email_Container">
                 <button onclick="Delete_Information_Item('email',${index})">-</button>
-                <input required type="text" class="Type_Input" list="Phone_Types" value="${Object.type}" oninput="Update_Information_Item('email', ${index}, 'type', this.value)">
-                <input required type="text" class="Edit_Input" placeholder="Address" value="${Object.address}" oninput="Update_Information_Item('email', ${index}, 'address', this.value)">
+                <input name="email_type_index_${index}" required type="text" class="Type_Input" list="Phone_Types" value="${Object.type}" oninput="Update_Information_Item('email', ${index}, 'type', this.value)">
+                <input name="email_address_index_${index}" required type="text" class="Edit_Input" placeholder="Address" value="${Object.address}" oninput="Update_Information_Item('email', ${index}, 'address', this.value)">
               </div>`;
     Email_Content.insertAdjacentHTML("beforeend", HTML);
   });
@@ -115,8 +115,8 @@ function Display_Edit_Contact() {
   Edit_Temp_Contact.social.forEach((Object, index) => {
     let HTML = `<div class="Social_Container">
                 <button onclick="Delete_Information_Item('social',${index})">-</button>
-                <input required type="text" class="Type_Input" list="Phone_Types" value="${Object.type}" oninput="Update_Information_Item('social', ${index}, 'type', this.value)">
-                <input required type="text" class="Edit_Input" placeholder="Social Platform" value="${Object.name}" oninput="Update_Information_Item('social', ${index}, 'name', this.value)">
+                <input name="social_type_index_${index}" required type="text" class="Type_Input" list="Phone_Types" value="${Object.type}" oninput="Update_Information_Item('social', ${index}, 'type', this.value)">
+                <input name="social_name_index_${index}" required type="text" class="Edit_Input" placeholder="Social Platform" value="${Object.name}" oninput="Update_Information_Item('social', ${index}, 'name', this.value)">
               </div>`;
     Social_Content.insertAdjacentHTML("beforeend", HTML);
   });
@@ -450,9 +450,15 @@ function EmailTo(address) {
   window.open(`mailto:${address}`);
 }
 
-document.querySelector("#Edit_Submit_BTN").addEventListener("click", (e) => {
+let Edit_Add_Container = document.querySelector("#Edit_Add_Container");
+Edit_Add_Container.addEventListener("submit", (e) => {
   e.preventDefault();
+  if (Edit_Add_Container.checkValidity()){
+    Save_Edit_Information();
+  }
 });
+
+
 
 
 // Phones, Emails. Socials, Note
