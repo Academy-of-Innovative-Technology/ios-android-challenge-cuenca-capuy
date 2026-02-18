@@ -80,8 +80,6 @@ let Phone_Number_Content = document.querySelector(".Phone_Number_Content");
 let Email_Content = document.querySelector(".Email_Content");
 let Social_Content = document.querySelector(".Social_Content");
 
-
-
 function Display_Edit_Contact() {
   document.querySelector("#Edit_First_Name").value =
     Edit_Temp_Contact.name.first;
@@ -153,8 +151,21 @@ function Update_Information_Item(Section, Index, Key, NewValue) {
   } else {
     Edit_Temp_Contact[Section][Index][Key] = NewValue;
   }
-  
 }
+
+const Information_Contact_Field_Templates = {
+  "phone": { "type": "", "number": 0 },
+  "email": { "type": "", "address": "" },
+  "social": { "type": "", "name": "" },
+};
+
+function Add_Edit_Information_Contact_Field(field_type){
+  let Template = Information_Contact_Field_Templates[field_type];
+  console.log(Template);
+  Edit_Temp_Contact[field_type].push(Template);
+  Display_Edit_Contact();
+}
+
 function Delete_Information_Item(category, index) {
   console.log(Edit_Temp_Contact[category]);
 
@@ -450,15 +461,17 @@ function EmailTo(address) {
   window.open(`mailto:${address}`);
 }
 
+
 let Edit_Add_Container = document.querySelector("#Edit_Add_Container");
+
+
+
 Edit_Add_Container.addEventListener("submit", (e) => {
   e.preventDefault();
   if (Edit_Add_Container.checkValidity()){
     Save_Edit_Information();
   }
 });
-
-
 
 
 // Phones, Emails. Socials, Note
