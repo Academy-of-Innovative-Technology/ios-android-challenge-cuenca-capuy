@@ -306,7 +306,7 @@ main {
 
   overflow: auto;
   scrollbar-color: white;
-  border-radius: 20px;
+  
 }
 
 .Top_Edit_Nav {
@@ -439,6 +439,7 @@ label {
   }
   #Edit_Add_Container {
     max-height: 90%;
+    border-radius: 20px;
   }
   .Mobile_Control {
     display: none;
