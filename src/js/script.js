@@ -1,15 +1,3 @@
-let Debug_Mode = true;
-function print(msg) {
-  if (Debug_Mode) {
-    console.log("-----------------------");
-    console.log("Caller:");
-    console.log(print.caller);
-    console.log("Msg:");
-    console.log(msg);
-    console.log("-----------------------");
-  }
-}
-
 const Contact_Categories = [
   "A",
   "B",
@@ -141,15 +129,14 @@ function Load_Edit_Contact() {
   Edit_Temp_Contact = structuredClone(
     Global_Contacts.contacts[Current_Selected_Contact_Index],
   );
-  console.log(Edit_Temp_Contact);
   Display_Edit_Contact();
 }
 
 function Cancel_Edit_Contact() {
   Edit_Temp_Contact = [];
-  if (Global_Contacts.contacts[Current_Selected_Contact_Index] == undefined){
-  console.log("Out of Bounds");
-  Contact_Select(0);
+  if (Global_Contacts.contacts[Current_Selected_Contact_Index] == undefined) {
+    console.log("Out of Bounds");
+    Contact_Select(0);
   }
   document.querySelector("#Edit_Add_Container").classList.add("Zoom_Out");
   setTimeout(() => {
@@ -167,26 +154,19 @@ function Open_Edit_Contact() {
   }, 350);
 }
 
-const Contact_Template =  {
-      "name": { "first": "", "last": "" },
-      "profile": "",
-      "phone": [
-        { "type": "", "number": 0 },
-      ],
-      "email": [
-        { "type": "", "address": "" }
-      ],
-      "social": [
-        { "type": "", "name": "" }
-      ],
-      "note": "",
+const Contact_Template = {
+  name: { first: "", last: "" },
+  profile: "",
+  phone: [{ type: "", number: 0 }],
+  email: [{ type: "", address: "" }],
+  social: [{ type: "", name: "" }],
+  note: "",
 };
 
 function Add_New_Contact() {
   Edit_Temp_Contact = [];
   Edit_Temp_Contact = structuredClone(Contact_Template);
-  console.log(Edit_Temp_Contact);
-  Current_Selected_Contact_Index = Global_Contacts.contacts.length
+  Current_Selected_Contact_Index = Global_Contacts.contacts.length;
   Display_Edit_Contact();
 
   document.querySelector(".Edit_Add_Section").classList.remove("Closed");
@@ -216,27 +196,19 @@ function Add_Edit_Information_Contact_Field(field_type) {
   let Template = structuredClone(
     Information_Contact_Field_Templates[field_type],
   );
-  console.log(Template);
+
   Edit_Temp_Contact[field_type].push(Template);
   Display_Edit_Contact();
 }
 
 function Delete_Information_Item(category, index) {
-  console.log(Edit_Temp_Contact[category]);
-
   Edit_Temp_Contact[category].splice(index, 1);
-  console.log(Edit_Temp_Contact);
+
   Display_Edit_Contact();
 }
 
 function Save_Edit_Information() {
-  console.log("Before");
-  console.log(Global_Contacts);
   Global_Contacts.contacts[Current_Selected_Contact_Index] = Edit_Temp_Contact;
-  console.log("After");
-  console.log(Global_Contacts);
-
-
   Save_All_Contacts();
   Load_All_Contacts();
 }
@@ -248,16 +220,14 @@ function Contact_Select(index) {
   url.searchParams.set("Contact_Selected", Current_Selected_Contact_Index);
   window.history.replaceState({}, "", url);
 
-  //console.log(index + " has been selected");
   let Information = Global_Contacts.contacts[index];
   if (Information == "" || Information == undefined) {
     console.log("No Profile Found");
   }
-  //console.log(Information);
+
   let Profile = Default_Profile_IMG;
   if (Information.profile != "" && Information.profile != undefined) {
     Profile = Information.profile;
-    //console.log("Profile Pic Found");
   } else {
     console.log("Profile Pic Not Found");
   }
@@ -360,7 +330,7 @@ async function Get_All_Contacts() {
     }
 
     const result = await response.json();
-    //console.log(result);
+
     return result;
   } catch (error) {
     console.log(error.message);
@@ -370,23 +340,12 @@ async function Get_All_Contacts() {
 let Contacts_Search_Filter_Input_DOM =
   document.querySelector("#Contacts_Search");
 
-// function Find_Profile_By_Number(Phone_Number) {
-//   if (Current_Contacts == undefined || Current_Contacts == []) {
-//     console.log("Current Contacts are empty, can't find");
-//     return;
-//   }
-//   let Result = Current_Contacts.find(
-//     (Contact) => Contact.phone[0].number == Phone_Number,
-//   );
-//   return Result;
-// }
-
 function Display_Contacts() {
   Load_All_Categories();
   Global_Contacts.contacts.forEach((Contact, index) => {
     let Full_Name = `${Contact.name.first} ${Contact.name.last}`;
     let Initial_Letter = Contact.name.first[0];
-    //console.log(Initial_Letter);
+
     let Letter_Category = document.querySelector(
       `#Contacts_Holder_${Initial_Letter}`,
     );
@@ -402,12 +361,10 @@ function Display_Contacts() {
       Contacts_Search_Filter_Input_DOM.value != undefined ||
       Contacts_Search_Filter_Input_DOM.value != ""
     ) {
-      //console.log(Contacts_Search_Filter_Input_DOM.value);
-
       let IsMatching = Full_Name.toLowerCase().includes(
         Contacts_Search_Filter_Input_DOM.value.toLowerCase(),
       );
-      //console.log(IsMatching);
+
       if (!IsMatching) {
         return;
       }
@@ -417,42 +374,18 @@ function Display_Contacts() {
     Letter_Category.insertAdjacentHTML("beforeend", HTML);
   });
 
-  Contacts_Container.querySelectorAll(".Contacts_Category").forEach( (Contacts_Category) => {
-    let Any_Contact = Contacts_Category.querySelector(".Contacts_Holder").querySelector("button");
-    console.log("Test");
-    if (Any_Contact == undefined){
-      Contacts_Category.style.display = "none";
-    }
-  })
-
+  Contacts_Container.querySelectorAll(".Contacts_Category").forEach(
+    (Contacts_Category) => {
+      let Any_Contact =
+        Contacts_Category.querySelector(".Contacts_Holder").querySelector(
+          "button",
+        );
+      if (Any_Contact == undefined) {
+        Contacts_Category.style.display = "none";
+      }
+    },
+  );
 }
-
-// let First_Load = true;
-// function Load_All_Contacts() {
-//   let Local_Contacts = JSON.parse(localStorage.getItem("Contacts_Data"));
-//   let Loaded_Contacts;
-
-//   if (Local_Contacts == undefined || Local_Contacts == "") {
-//     let Contacts = Get_All_Contacts();
-//     Contacts.then((List) => {
-//       let Ordered_Contacts = List.Contacts.sort((a, b) =>
-//         a.name.first.localeCompare(b.name.first),
-//       );
-//       console.log(Ordered_Contacts);
-//       Display_Contacts(List.Contacts);
-//       Loaded_Contacts = List.Contact;
-//     });
-//   } else {
-//     let Ordered_Contacts = Local_Contacts.sort((a, b) =>
-//       a.name.first.localeCompare(b.name.first),
-//     );
-//     Display_Contacts(Ordered_Contacts);
-//     Loaded_Contacts = Local_Contacts;
-//   }
-//   if (First_Load) {
-//     Contact_Select(Loaded_Contacts[0].phone[0].number);
-//   }
-// }
 
 function Save_All_Contacts() {
   if (
@@ -465,14 +398,11 @@ function Save_All_Contacts() {
   }
 
   let Proper_Format = { contacts: Global_Contacts.contacts };
-  console.log("Proper");
-  console.log(Proper_Format);
+
   localStorage.setItem(
     Saved_Data_LocalStorage_Name,
     JSON.stringify(Proper_Format),
   );
-  console.log("Saved");
-  console.log(JSON.parse(localStorage.getItem(Saved_Data_LocalStorage_Name)));
 }
 
 function Load_All_Contacts() {
@@ -490,8 +420,7 @@ function Load_All_Contacts() {
     );
     let Contacts_Ordered = {};
     Contacts_Ordered.contacts = Sorted;
-    console.log("Ordered");
-    console.log(Contacts_Ordered);
+
     Global_Contacts = Contacts_Ordered;
     //onsole.log(Contacts_Ordered);
 
@@ -511,7 +440,6 @@ function Load_All_Contacts() {
         Saved_Data_LocalStorage_Name,
         JSON.stringify(Global_Contacts),
       );
-      console.log(Contacts_Ordered);
 
       Display_Contacts();
       Contact_Select(Current_Selected_Contact_Index);
@@ -522,7 +450,7 @@ function Load_All_Contacts() {
 let urlParams = new URLSearchParams(window.location.search);
 Current_Selected_Contact_Index = urlParams.get("Contact_Selected") || 0;
 
-if (Current_Selected_Contact_Index < 0 ){
+if (Current_Selected_Contact_Index < 0) {
   console.log("Out of Bounds");
   Current_Selected_Contact_Index = 0;
 }
@@ -530,32 +458,12 @@ if (Current_Selected_Contact_Index < 0 ){
 Load_All_Contacts();
 
 Contacts_Search_Filter_Input_DOM.addEventListener("input", () => {
-  console.log("Filter Changed");
   Load_All_Contacts();
 });
 
 function EmailTo(address) {
-  console.log(address);
   window.open(`mailto:${address}`);
 }
-
-
-
-function areObjectsEqual(obj1, obj2) {
-    const keys1 = Object.keys(obj1);
-    const keys2 = Object.keys(obj2);
-    if (keys1.length !== keys2.length) {
-        return false;
-    }
-    for (const key of keys1) {
-        if (obj1[key] !== obj2[key]) {
-            return false;
-        }
-    }
-    return true;
-}
-
-
 
 let Edit_Add_Container = document.querySelector("#Edit_Add_Container");
 
@@ -563,15 +471,14 @@ Edit_Add_Container.addEventListener("submit", (e) => {
   e.preventDefault();
   if (Edit_Add_Container.checkValidity()) {
     Save_Edit_Information();
-    let Index = Global_Contacts.contacts.findIndex( (item) => JSON.stringify(item) == JSON.stringify(Edit_Temp_Contact));
+    let Index = Global_Contacts.contacts.findIndex(
+      (item) => JSON.stringify(item) == JSON.stringify(Edit_Temp_Contact),
+    );
 
-
-    console.log("Index after saving:" + Index);
     if (Index) {
       Contact_Select(Index);
     }
     Cancel_Edit_Contact();
-    
   }
 });
 

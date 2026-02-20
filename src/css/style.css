@@ -440,6 +440,7 @@ label {
   #Edit_Add_Container {
     max-height: 90%;
     border-radius: 20px;
+    min-width: 481px;
   }
   .Mobile_Control {
     display: none;
