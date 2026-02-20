@@ -10,7 +10,7 @@ let Current_Width = window.innerWidth;
 let Current_Window = Contacts_Section;
 
 function Move_To(Animation) {
-  if (Animation) {
+  if (Animation != false) {
     Current_Window.scrollIntoView({ behavior: "smooth" });
   } else {
     Current_Window.scrollIntoView();
