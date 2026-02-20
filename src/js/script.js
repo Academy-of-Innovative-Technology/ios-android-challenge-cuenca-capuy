@@ -139,12 +139,22 @@ function Load_Edit_Contact() {
 
 function Cancel_Edit_Contact() {
   Edit_Temp_Contact = [];
-  document.querySelector(".Edit_Add_Section").classList.add("Closed");
+  document.querySelector("#Edit_Add_Container").classList.add("Zoom_Out");
+  setTimeout( () => {
+    document.querySelector(".Edit_Add_Section").classList.add("Closed");
+    document.querySelector("#Edit_Add_Container").classList.remove("Zoom_Out");
+  }, 350)
+  
 }
 function Open_Edit_Contact() {
   Edit_Temp_Contact = [];
   document.querySelector(".Edit_Add_Section").classList.remove("Closed");
   Load_Edit_Contact();
+  document.querySelector("#Edit_Add_Container").classList.add("Zoom_In");
+  setTimeout( () => {
+    document.querySelector("#Edit_Add_Container").classList.remove("Zoom_In");
+  }, 350)
+
 }
 
 function Update_Information_Item(Section, Index, Key, NewValue) {
@@ -180,7 +190,6 @@ function Save_Edit_Information() {
   Global_Contacts[Current_Selected_Contact_Index] = Edit_Temp_Contact;
   Save_All_Contacts();
   Load_All_Contacts();
-  document.querySelector(".Edit_Add_Section").classList.add("Closed");
 }
 
 function Contact_Select(index) {
@@ -452,8 +461,6 @@ Current_Selected_Contact_Index = urlParams.get("Contact_Selected") || 0;
 
 Load_All_Contacts();
 
-Open_Edit_Contact();
-
 Contacts_Search_Filter_Input_DOM.addEventListener("input", () => {
   console.log("Filter Changed");
   Load_All_Contacts();
@@ -470,6 +477,7 @@ Edit_Add_Container.addEventListener("submit", (e) => {
   e.preventDefault();
   if (Edit_Add_Container.checkValidity()) {
     Save_Edit_Information();
+    Cancel_Edit_Contact();
   }
 });
 

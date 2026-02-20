@@ -5,12 +5,7 @@ let Information_Section = document.querySelector(".Information_Section");
 let Return_To_Main_BTN = document.querySelector("#Return_To_Main_BTN");
 let Edit_Add_Section = document.querySelector(".Edit_Add_Section");
 
-
 let Current_Width = window.innerWidth;
-
-
-
-
 
 let Current_Window = Contacts_Section;
 
@@ -20,30 +15,22 @@ function Move_To(Animation) {
   } else {
     Current_Window.scrollIntoView();
   }
-  
 }
-
-
 
 function Switch_To_Edit() {
   Current_Window = Edit_Add_Section;
-  Move_To()
+  Move_To();
 }
 
 function Switch_To_Contacts() {
   Current_Window = Contacts_Section;
-  Move_To()
+  Move_To();
 }
 
 function Switch_To_Mobile_Info() {
   Current_Window = Information_Section;
-  Move_To()
+  Move_To();
 }
-
-
-
-
-
 
 let resizerTimer;
 function Update() {
