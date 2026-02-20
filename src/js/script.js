@@ -139,7 +139,7 @@ function Display_Edit_Contact() {
 
 function Load_Edit_Contact() {
   Edit_Temp_Contact = structuredClone(
-    Global_Contacts[Current_Selected_Contact_Index],
+    Global_Contacts.contacts[Current_Selected_Contact_Index],
   );
   console.log(Edit_Temp_Contact);
   Display_Edit_Contact();
@@ -155,6 +155,37 @@ function Cancel_Edit_Contact() {
 }
 function Open_Edit_Contact() {
   Edit_Temp_Contact = [];
+  Load_Edit_Contact();
+  document.querySelector(".Edit_Add_Section").classList.remove("Closed");
+  document.querySelector("#Edit_Add_Container").classList.add("Zoom_In");
+  setTimeout(() => {
+    document.querySelector("#Edit_Add_Container").classList.remove("Zoom_In");
+  }, 350);
+}
+
+const Contact_Template =  {
+      "name": { "first": "", "last": "" },
+      "profile": "",
+      "phone": [
+        { "type": "", "number": 0 },
+        { "type": "", "number": 0 }
+      ],
+      "email": [
+        { "type": "", "address": "" },
+        { "type": "", "address": "" }
+      ],
+      "social": [
+        { "type": "", "name": "" },
+        { "type": "", "name": "" }
+      ],
+      "note": "",
+};
+
+function Add_New_Contact() {
+  Edit_Temp_Contact = [];
+  Global_Contacts.push(structuredClone(Contact_Template));
+  Current_Selected_Contact_Index = Global_Contacts.length - 1
+  Load_Edit_Contact();
   document.querySelector(".Edit_Add_Section").classList.remove("Closed");
   Load_Edit_Contact();
   document.querySelector("#Edit_Add_Container").classList.add("Zoom_In");
@@ -197,7 +228,13 @@ function Delete_Information_Item(category, index) {
 }
 
 function Save_Edit_Information() {
-  Global_Contacts[Current_Selected_Contact_Index] = Edit_Temp_Contact;
+  console.log("Before");
+  console.log(Global_Contacts);
+  Global_Contacts.contacts[Current_Selected_Contact_Index] = Edit_Temp_Contact;
+  console.log("After");
+  console.log(Global_Contacts);
+
+
   Save_All_Contacts();
   Load_All_Contacts();
 }
@@ -425,11 +462,15 @@ function Save_All_Contacts() {
     return;
   }
 
-  let Proper_Format = { contacts: Global_Contacts };
+  let Proper_Format = { contacts: Global_Contacts.contacts };
+  console.log("Proper");
+  console.log(Proper_Format);
   localStorage.setItem(
     Saved_Data_LocalStorage_Name,
     JSON.stringify(Proper_Format),
   );
+  console.log("Saved");
+  console.log(JSON.parse(localStorage.getItem(Saved_Data_LocalStorage_Name)));
 }
 
 function Load_All_Contacts() {
@@ -445,9 +486,10 @@ function Load_All_Contacts() {
     let Sorted = Local_Contacts.contacts.sort((a, b) =>
       a.name.first.localeCompare(b.name.first),
     );
-    let Contacts_Ordered = Sorted;
+    let Contacts_Ordered = {};
     Contacts_Ordered.contacts = Sorted;
-
+    console.log("Ordered");
+    console.log(Contacts_Ordered);
     Global_Contacts = Contacts_Ordered;
     //onsole.log(Contacts_Ordered);
 
